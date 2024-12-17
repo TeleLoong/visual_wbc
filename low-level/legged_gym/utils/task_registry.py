@@ -146,6 +146,7 @@ class TaskRegistry():
         log_dir = log_root
         
         train_cfg_dict = class_to_dict(train_cfg)
+        
         if env.name == "b1z1_pick":
             runner = OnPolicyRunnerHRL(env,
                                        train_cfg_dict,
@@ -156,6 +157,8 @@ class TaskRegistry():
                                     train_cfg_dict, 
                                     log_dir, 
                                     device=args.rl_device)
+        
+        
         #save resume path before creating a new log_dir
         resume = train_cfg.runner.resume
         if args.resumeid:

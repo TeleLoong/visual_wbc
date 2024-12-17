@@ -30,9 +30,15 @@
 
 from .manip_loco.manip_loco import ManipLoco
 from .manip_loco.b1z1_config import B1Z1RoughCfg, B1Z1RoughCfgPPO
+from .b2w_z1.b2w_z1_config import B2WZ1RoughCfg, B2WZ1RoughCfgPPO
+from .b2w_z1.b2w_z1_robot import B2WZ1Robot
 
+from .b2z1.b2z1_config import B2Z1RoughCfg, B2Z1RoughCfgPPO
+from .b2z1.b2z1 import B2Z1
 import os
 
 from legged_gym.utils.task_registry import task_registry
+task_registry.register( "b2z1", B2Z1, B2Z1RoughCfg(), B2Z1RoughCfgPPO(),'b2w_z1')
 
+task_registry.register( "b2w_z1", ManipLoco, B2WZ1RoughCfg(), B2WZ1RoughCfgPPO(),'b2w_z1')
 task_registry.register( "b1z1", ManipLoco, B1Z1RoughCfg(), B1Z1RoughCfgPPO(), 'b1z1')

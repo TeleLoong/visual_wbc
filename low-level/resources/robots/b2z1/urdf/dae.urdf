@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- This URDF was automatically created by SolidWorks to URDF Exporter! Originally created by Stephen Brawner (brawner@gmail.com) 
+     Commit Version: 1.6.0-4-g7f85cfe  Build Version: 1.6.7995.38578
+     For more information, please see http://wiki.ros.org/sw_urdf_exporter -->
+<robot name="b2z1">
+  <link name="base_link">
+    <inertial>
+      <origin xyz="0.000458 0.005261 0.000665" rpy="0 0 0" />
+      <mass value="35.86" />
+      <inertia ixx="0.27466" ixy="-0.000622" ixz="0.00315" iyy="1.0618" iyz="-0.00139" izz="1.1825" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://b2z1/meshes/base_link.dae" />
+      </geometry>
+      <material name="">
+        <color rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <box size="0.5 0.28 0.15" />
+      </geometry>
+    </collision>
+  </link>
+</robot>

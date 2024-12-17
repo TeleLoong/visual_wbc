@@ -87,8 +87,8 @@ class ManipLoco(LeggedRobot):
         # ee_goal_cart_yaw_global = quat_apply(self.base_yaw_quat, self.curr_ee_goal_cart)
         # curr_ee_goal_cart_world = self._get_ee_goal_spherical_center() + ee_goal_cart_yaw_global
         
-        dpos = self.curr_ee_goal_cart_world - self.ee_pos
-        drot = orientation_error(self.ee_goal_orn_quat, self.ee_orn / torch.norm(self.ee_orn, dim=-1).unsqueeze(-1))
+        dpos = self.curr_ee_goal_cart_world - self.ee_pos   #目标末端执行器和当前末端执行其的位置差值
+        drot = orientation_error(self.ee_goal_orn_quat, self.ee_orn / torch.norm(self.ee_orn, dim=-1).unsqueeze(-1))  #目标末端执行器和当前末端执行其的旋转差值
         dpose = torch.cat([dpos, drot], -1).unsqueeze(-1)
         arm_pos_targets = self._control_ik(dpose) + self.dof_pos[:, -(6 + self.cfg.env.num_gripper_joints):-self.cfg.env.num_gripper_joints]
         all_pos_targets = torch.zeros_like(self.dof_pos)
@@ -710,6 +710,12 @@ class ManipLoco(LeggedRobot):
         rigid_body_state_tensor = self.gym.acquire_rigid_body_state_tensor(self.sim)
         jacobian_tensor = self.gym.acquire_jacobian_tensor(self.sim, "robot_dog")
         force_sensor_tensor = self.gym.acquire_force_sensor_tensor(self.sim)
+        
+
+     
+        if force_sensor_tensor is None:
+            raise ValueError("Failed to acquire force sensor tensor. Ensure force sensors are properly configured.")
+
 
         self.gym.refresh_dof_state_tensor(self.sim)
         self.gym.refresh_actor_root_state_tensor(self.sim)
@@ -858,6 +864,7 @@ class ManipLoco(LeggedRobot):
         self.default_dof_pos = torch.zeros(self.num_dofs, dtype=torch.float, device=self.device, requires_grad=False)
         for i in range(self.num_dofs):
             name = self.dof_names[i]
+            print(self.cfg.init_state.default_joint_angles)
             angle = self.cfg.init_state.default_joint_angles[name]
             self.default_dof_pos[i] = angle
         
@@ -1255,7 +1262,7 @@ class ManipLoco(LeggedRobot):
         collision_mask = torch.any(torch.logical_and(torch.all(ee_target_cart < self.collision_upper_limits, dim=-1), torch.all(ee_target_cart > self.collision_lower_limits, dim=-1)), dim=0)
         underground_mask = torch.any(ee_target_cart[..., 2] < self.underground_limit, dim=0)
         return collision_mask | underground_mask
-
+################################################################
     def _update_curr_ee_goal(self):
         if not self.cfg.env.teleop_mode:
             t = torch.clip(self.goal_timer / self.traj_timesteps, 0, 1)

@@ -34,13 +34,13 @@ import numpy as np
 class B1Z1RoughCfg( LeggedRobotCfg ):
     class goal_ee:
         num_commands = 3
-        traj_time = [1, 3]
-        hold_time = [0.5, 2]
-        collision_upper_limits = [0.1, 0.2, -0.05]
-        collision_lower_limits = [-0.8, -0.2, -0.7]
-        underground_limit = -0.7
-        num_collision_check_samples = 10
-        command_mode = 'sphere'
+        traj_time = [1, 3]  #轨迹持续时间范围
+        hold_time = [0.5, 2] #保持时间范围
+        collision_upper_limits = [0.1, 0.2, -0.05] 
+        collision_lower_limits = [-0.8, -0.2, -0.7]  #碰撞检测上下届
+        underground_limit = -0.7    #地下碰撞检测
+        num_collision_check_samples = 10  #碰撞检测的样本数量
+        command_mode = 'sphere'    
         arm_induced_pitch = 0.38 # Added to -pos_p (negative goal pitch) to get default eef orn_p
 
         class sphere_center:
@@ -101,7 +101,8 @@ class B1Z1RoughCfg( LeggedRobotCfg ):
         clip_actions = 100.
 
     class env:
-        num_envs = 6144
+        num_envs = 64
+        # num_envs = 6144
         num_actions = 12 + 6 #CAUTION
         num_torques = 12 + 6
         action_delay = 3  # -1 for no delay
@@ -170,7 +171,7 @@ class B1Z1RoughCfg( LeggedRobotCfg ):
         terminate_after_contacts_on = []
         self_collisions = 0 # 1 to disable, 0 to enable...bitwise filter
         flip_visual_attachments = False
-        collapse_fixed_joints = True # Specific fixed joints can be kept by adding " <... dont_collapse="true">
+        collapse_fixed_joints = False # Specific fixed joints can be kept by adding " <... dont_collapse="true">
         fix_base_link = False
     
     class box:
