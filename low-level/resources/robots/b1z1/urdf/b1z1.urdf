@@ -48,7 +48,7 @@
     <visual>
       <origin rpy="0 0 0" xyz="0 0 0" />
       <geometry>
-        <mesh filename="/home/lamb/visual_wholebody/low-level/resources/robots/b2w_z1/meshes/base_link.dae"
+        <mesh filename="/home/lamb/visual_wholebody/low-level/resources/robots/b1z1/meshes/trunk.dae"
           scale="1 1 1" />
       </geometry>
       <material name="orange" />

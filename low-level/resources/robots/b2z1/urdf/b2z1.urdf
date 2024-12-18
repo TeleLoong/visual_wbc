@@ -26,7 +26,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="/home/lamb/legged-robots-manipulation/loco_manipulation_gym/resources/robots/b2w_z1/meshes/base_link.dae" />
+          filename="/home/lamb/visual_wholebody/low-level/resources/robots/b2z1/meshes/base_link.dae" />
       </geometry>
       <material
         name="">

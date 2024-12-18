@@ -101,7 +101,7 @@ class B2Z1RoughCfg( LeggedRobotCfg ):
         clip_actions = 100.
 
     class env:
-        num_envs = 64
+        num_envs = 3072
         # num_envs = 3072
         num_actions = 12 + 6 #CAUTION
         num_torques = 12 + 6
@@ -301,53 +301,53 @@ class B2Z1RoughCfg( LeggedRobotCfg ):
         p_threshold = 0.8
         z_threshold = 0.1
 
-    # class terrain:
-    #     mesh_type = 'plane' # "heightfield" # none, plane, heightfield or trimesh
-    #     hf2mesh_method = "fast"  # grid or fast
-    #     max_error = 0.1 # for fast
-    #     horizontal_scale = 0.05 # [m] influence computation time by a lot
-    #     vertical_scale = 0.005 # [m]
-    #     border_size = 25 # [m]
-    #     height = [0.00, 0.1] # [0.04, 0.1]
-    #     gap_size = [0.02, 0.1]
-    #     stepping_stone_distance = [0.02, 0.08]
-    #     downsampled_scale = 0.075
-    #     curriculum = False
+    class terrain:
+        mesh_type = 'trimesh' # "heightfield" # none, plane, heightfield or trimesh
+        hf2mesh_method = "fast"  # grid or fast
+        max_error = 0.1 # for fast
+        horizontal_scale = 0.05 # [m] influence computation time by a lot
+        vertical_scale = 0.005 # [m]
+        border_size = 25 # [m]
+        height = [0.00, 0.1] # [0.04, 0.1]
+        gap_size = [0.02, 0.1]
+        stepping_stone_distance = [0.02, 0.08]
+        downsampled_scale = 0.075
+        curriculum = False
 
-    #     all_vertical = False
-    #     no_flat = True
+        all_vertical = False
+        no_flat = True
         
-    #     static_friction = 1.0
-    #     dynamic_friction = 1.0
-    #     restitution = 0.
+        static_friction = 1.0
+        dynamic_friction = 1.0
+        restitution = 0.
 
-    #     measure_heights = True
-    #     measured_points_x = [-0.8, -0.7, -0.6, -0.5, -0.4, -0.3, -0.2, -0.1, 0., 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8] # 1mx1.6m rectangle (without center line)
-    #     measured_points_y = [-0.5, -0.4, -0.3, -0.2, -0.1, 0., 0.1, 0.2, 0.3, 0.4, 0.5]
+        measure_heights = True
+        measured_points_x = [-0.8, -0.7, -0.6, -0.5, -0.4, -0.3, -0.2, -0.1, 0., 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8] # 1mx1.6m rectangle (without center line)
+        measured_points_y = [-0.5, -0.4, -0.3, -0.2, -0.1, 0., 0.1, 0.2, 0.3, 0.4, 0.5]
         
-    #     selected = False # select a unique terrain type and pass all arguments
-    #     terrain_kwargs = None # Dict of arguments for selected terrain
-    #     max_init_terrain_level = 5 # starting curriculum state
-    #     terrain_length = 8.
-    #     terrain_width = 8.
-    #     num_rows= 10 # number of terrain rows (levels)  # spreaded is benifitiall !
-    #     num_cols = 20 # number of terrain cols (types)
+        selected = False # select a unique terrain type and pass all arguments
+        terrain_kwargs = None # Dict of arguments for selected terrain
+        max_init_terrain_level = 5 # starting curriculum state
+        terrain_length = 8.
+        terrain_width = 8.
+        num_rows= 10 # number of terrain rows (levels)  # spreaded is benifitiall !
+        num_cols = 20 # number of terrain cols (types)
 
-    #     terrain_dict = {"smooth slope": 0., 
-    #                     "rough slope up": 0.,
-    #                     "rough slope down": 0.,
-    #                     "rough stairs up": 0., 
-    #                     "rough stairs down": 0., 
-    #                     "discrete": 0., 
-    #                     "stepping stones": 0.,
-    #                     "gaps": 0., 
-    #                     "rough flat": 1.0,
-    #                     "pit": 0.0,
-    #                     "wall": 0.0}
-    #     terrain_proportions = list(terrain_dict.values())
-    #     # trimesh only:
-    #     slope_treshold = None # slopes above this threshold will be corrected to vertical surfaces
-    #     origin_zero_z = False
+        terrain_dict = {"smooth slope": 0., 
+                        "rough slope up": 0.,
+                        "rough slope down": 0.,
+                        "rough stairs up": 0., 
+                        "rough stairs down": 0., 
+                        "discrete": 0., 
+                        "stepping stones": 0.,
+                        "gaps": 0., 
+                        "rough flat": 1.0,
+                        "pit": 0.0,
+                        "wall": 0.0}
+        terrain_proportions = list(terrain_dict.values())
+        # trimesh only:
+        slope_treshold = None # slopes above this threshold will be corrected to vertical surfaces
+        origin_zero_z = False
 
 
 class B2Z1RoughCfgPPO(LeggedRobotCfgPPO):
